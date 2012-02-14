@@ -303,6 +303,9 @@ public class DialpadFragment extends Fragment
         }
         mT9Flipper = (ViewSwitcher) fragmentView.findViewById(R.id.t9flipper);
         mT9Top = (LinearLayout) fragmentView.findViewById(R.id.t9topbar);
+
+        PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
+
         // Soft menu button should appear only when there's no hardware menu button.
         mMenuButton = fragmentView.findViewById(R.id.overflow_menu);
         if (mMenuButton != null) {
@@ -536,7 +539,6 @@ public class DialpadFragment extends Fragment
             loadContacts.start();
         }
 
-        PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
         hideT9();
         // Query the last dialed number. Do it first because hitting
         // the DB is 'slow'. This call is asynchronous.
