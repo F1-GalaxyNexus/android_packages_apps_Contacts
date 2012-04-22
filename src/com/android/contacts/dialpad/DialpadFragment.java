@@ -286,20 +286,6 @@ public class DialpadFragment extends Fragment
         mDigits.setOnKeyListener(this);
         mDigits.setOnLongClickListener(this);
         mDigits.addTextChangedListener(this);
-
-        PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
-
-        DisplayMetrics dm = getResources().getDisplayMetrics();
-        int minCellSize = (int) (56 * dm.density); // 56dip == minimum size of menu buttons
-        int cellCount = dm.widthPixels / minCellSize;
-        int fakeMenuItemWidth = dm.widthPixels / cellCount;
-        if (DEBUG) Log.d(TAG, "The size of fake menu buttons (in pixel): " + fakeMenuItemWidth);
-
-        mT9Result = (TextView) fragmentView.findViewById(R.id.t9result);
-        if (mT9Result != null) {
-            mT9Result.setOnClickListener(this);
-        }
-        mT9ResultBadge = (QuickContactBadge) fragmentView.findViewById(R.id.t9badge);
         mT9List = (ListView) fragmentView.findViewById(R.id.t9list);
         if (mT9List!= null) {
             mT9List.setOnItemClickListener(this);
@@ -317,6 +303,12 @@ public class DialpadFragment extends Fragment
         mT9Top = (LinearLayout) fragmentView.findViewById(R.id.t9topbar);
 
         PhoneNumberFormatter.setPhoneNumberFormattingTextWatcher(getActivity(), mDigits);
+
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        int minCellSize = (int) (56 * dm.density); // 56dip == minimum size of menu buttons
+        int cellCount = dm.widthPixels / minCellSize;
+        int fakeMenuItemWidth = dm.widthPixels / cellCount;
+        if (DEBUG) Log.d(TAG, "The size of fake menu buttons (in pixel): " + fakeMenuItemWidth);
 
         // Soft menu button should appear only when there's no hardware menu button.
         mMenuButton = fragmentView.findViewById(R.id.overflow_menu);
